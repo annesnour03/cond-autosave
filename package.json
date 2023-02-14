@@ -1,0 +1,64 @@
+{
+  "name": "cond-autosave",
+  "displayName": "Cond AutoSave",
+  "description": "This extention disables the vscode autosave feature in certain specified directory's. This is especially handy for  projects that hot reload, which would otherwise produce errors, forcing the developer to reload.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cond-autosave.addFolder",
+        "title": "Add folder",
+        "shortTitle": "Add folder"
+      },{
+        "command": "cond-autosave.removeFolder",
+        "title": "Remove current folder",
+        "shortTitle": "Remove current folder"
+      }
+    ],
+    "configuration": {
+      "title": "Conditionally autosave",
+      "properties": {
+        "cond-autosave.disabledFolders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": {},
+          "scope": "window",
+          "description": "Disables autosave in these given folders."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.75.0",
+    "@types/glob": "^8.0.1",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^5.49.0",
+    "@typescript-eslint/parser": "^5.49.0",
+    "eslint": "^8.33.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.1.0",
+    "typescript": "^4.9.4",
+    "@vscode/test-electron": "^2.2.2"
+  }
+}
